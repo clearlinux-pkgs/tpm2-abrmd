@@ -1,0 +1,4 @@
+--with-dbuspolicydir=/usr/share/dbus-1/system.d
+--with-systemdsystemunitdir=/usr/lib/systemd/system
+--with-systemdpresetdir=/usr/lib/systemd/system-preset
+--datarootdir=/usr/share
