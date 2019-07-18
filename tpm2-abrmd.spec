@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x32F77E75C2E1D3BA (flihp@twobit.us)
 #
 Name     : tpm2-abrmd
-Version  : 2.1.1
-Release  : 4
-URL      : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.1.1/tpm2-abrmd-2.1.1.tar.gz
-Source0  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.1.1/tpm2-abrmd-2.1.1.tar.gz
-Source99 : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.1.1/tpm2-abrmd-2.1.1.tar.gz.asc
+Version  : 2.2.0
+Release  : 5
+URL      : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.2.0/tpm2-abrmd-2.2.0.tar.gz
+Source0  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.2.0/tpm2-abrmd-2.2.0.tar.gz
+Source99 : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.2.0/tpm2-abrmd-2.2.0.tar.gz.asc
 Summary  : Trusted Platform Module 2.0 Access Broker and Resource Management Daemon
 Group    : Development/Tools
 License  : BSD-2-Clause
@@ -20,17 +20,17 @@ Requires: tpm2-abrmd-license = %{version}-%{release}
 Requires: tpm2-abrmd-man = %{version}-%{release}
 Requires: tpm2-abrmd-services = %{version}-%{release}
 BuildRequires : pkgconfig(cmocka)
-BuildRequires : pkgconfig(dbus-1)
 BuildRequires : pkgconfig(gio-unix-2.0)
 BuildRequires : pkgconfig(glib-2.0)
 BuildRequires : pkgconfig(gobject-2.0)
+BuildRequires : pkgconfig(tss2-mu)
 BuildRequires : pkgconfig(tss2-sys)
 BuildRequires : valgrind
 
 %description
 [![Build Status](https://travis-ci.org/tpm2-software/tpm2-abrmd.svg?branch=master)](https://travis-ci.org/tpm2-software/tpm2-abrmd)
 [![Coverity Scan](https://img.shields.io/coverity/scan/3997.svg)](https://scan.coverity.com/projects/01org-tpm2-abrmd)
-[![Coverage Status](https://img.shields.io/coveralls/github/tpm2-software/tpm2-abrmd/master.svg)](https://coveralls.io/github/tpm2-software/tpm2-abrmd?branch=master)
+[![codecov](https://codecov.io/gh/tpm2-software/tpm2-abrmd/branch/master/graph/badge.svg)](https://codecov.io/gh/tpm2-software/tpm2-abrmd)
 
 %package bin
 Summary: bin components for the tpm2-abrmd package.
@@ -58,6 +58,7 @@ Requires: tpm2-abrmd-lib = %{version}-%{release}
 Requires: tpm2-abrmd-bin = %{version}-%{release}
 Requires: tpm2-abrmd-data = %{version}-%{release}
 Provides: tpm2-abrmd-devel = %{version}-%{release}
+Requires: tpm2-abrmd = %{version}-%{release}
 Requires: tpm2-abrmd = %{version}-%{release}
 
 %description dev
@@ -99,15 +100,22 @@ services components for the tpm2-abrmd package.
 
 
 %prep
-%setup -q -n tpm2-abrmd-2.1.1
+%setup -q -n tpm2-abrmd-2.2.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1552190079
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1563424607
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static --with-dbuspolicydir=/usr/share/dbus-1/system.d \
 --with-systemdsystemunitdir=/usr/lib/systemd/system \
 --with-systemdpresetdir=/usr/lib/systemd/system-preset \
@@ -115,14 +123,14 @@ export LDFLAGS="${LDFLAGS} -fno-lto"
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1552190079
+export SOURCE_DATE_EPOCH=1563424607
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tpm2-abrmd
 cp LICENSE %{buildroot}/usr/share/package-licenses/tpm2-abrmd/LICENSE
