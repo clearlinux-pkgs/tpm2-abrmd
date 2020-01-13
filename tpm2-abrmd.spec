@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x32F77E75C2E1D3BA (flihp@twobit.us)
 #
 Name     : tpm2-abrmd
-Version  : 2.3.0
-Release  : 6
-URL      : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.0/tpm2-abrmd-2.3.0.tar.gz
-Source0  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.0/tpm2-abrmd-2.3.0.tar.gz
-Source1 : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.0/tpm2-abrmd-2.3.0.tar.gz.asc
+Version  : 2.3.1
+Release  : 7
+URL      : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.1/tpm2-abrmd-2.3.1.tar.gz
+Source0  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.1/tpm2-abrmd-2.3.1.tar.gz
+Source1  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.1/tpm2-abrmd-2.3.1.tar.gz.asc
 Summary  : Trusted Platform Module 2.0 Access Broker and Resource Management Daemon
 Group    : Development/Tools
 License  : BSD-2-Clause
@@ -102,15 +102,15 @@ services components for the tpm2-abrmd package.
 
 
 %prep
-%setup -q -n tpm2-abrmd-2.3.0
-cd %{_builddir}/tpm2-abrmd-2.3.0
+%setup -q -n tpm2-abrmd-2.3.1
+cd %{_builddir}/tpm2-abrmd-2.3.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1574703947
+export SOURCE_DATE_EPOCH=1578948613
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -134,10 +134,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1574703947
+export SOURCE_DATE_EPOCH=1578948613
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tpm2-abrmd
-cp %{_builddir}/tpm2-abrmd-2.3.0/LICENSE %{buildroot}/usr/share/package-licenses/tpm2-abrmd/af62924ad3089277c413ea767486f404ac159ce1
+cp %{_builddir}/tpm2-abrmd-2.3.1/LICENSE %{buildroot}/usr/share/package-licenses/tpm2-abrmd/af62924ad3089277c413ea767486f404ac159ce1
 %make_install
 
 %files
