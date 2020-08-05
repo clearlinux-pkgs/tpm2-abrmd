@@ -6,11 +6,11 @@
 #
 Name     : tpm2-abrmd
 Version  : 2.3.1
-Release  : 7
+Release  : 8
 URL      : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.1/tpm2-abrmd-2.3.1.tar.gz
 Source0  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.1/tpm2-abrmd-2.3.1.tar.gz
 Source1  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.1/tpm2-abrmd-2.3.1.tar.gz.asc
-Summary  : Trusted Platform Module 2.0 Access Broker and Resource Management Daemon
+Summary  : TCTI library for communicating with the TPM2 access broker / resource manager daemon (tabrmd).
 Group    : Development/Tools
 License  : BSD-2-Clause
 Requires: tpm2-abrmd-bin = %{version}-%{release}
@@ -61,7 +61,6 @@ Requires: tpm2-abrmd-bin = %{version}-%{release}
 Requires: tpm2-abrmd-data = %{version}-%{release}
 Provides: tpm2-abrmd-devel = %{version}-%{release}
 Requires: tpm2-abrmd = %{version}-%{release}
-Requires: tpm2-abrmd = %{version}-%{release}
 
 %description dev
 dev components for the tpm2-abrmd package.
@@ -110,15 +109,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1578948613
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1596644883
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static --with-dbuspolicydir=/usr/share/dbus-1/system.d \
 --with-systemdsystemunitdir=/usr/lib/systemd/system \
@@ -131,10 +129,10 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1578948613
+export SOURCE_DATE_EPOCH=1596644883
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tpm2-abrmd
 cp %{_builddir}/tpm2-abrmd-2.3.1/LICENSE %{buildroot}/usr/share/package-licenses/tpm2-abrmd/af62924ad3089277c413ea767486f404ac159ce1
