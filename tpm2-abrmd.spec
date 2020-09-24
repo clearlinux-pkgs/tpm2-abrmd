@@ -6,7 +6,7 @@
 #
 Name     : tpm2-abrmd
 Version  : 2.3.1
-Release  : 8
+Release  : 9
 URL      : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.1/tpm2-abrmd-2.3.1.tar.gz
 Source0  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.1/tpm2-abrmd-2.3.1.tar.gz
 Source1  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.1/tpm2-abrmd-2.3.1.tar.gz.asc
