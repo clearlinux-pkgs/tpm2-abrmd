@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x6DE2E9078E1F50C1 (william.c.roberts@intel.com)
 #
 Name     : tpm2-abrmd
-Version  : 2.3.3
-Release  : 10
-URL      : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.3/tpm2-abrmd-2.3.3.tar.gz
-Source0  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.3/tpm2-abrmd-2.3.3.tar.gz
-Source1  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.3.3/tpm2-abrmd-2.3.3.tar.gz.asc
+Version  : 2.4.0
+Release  : 11
+URL      : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.4.0/tpm2-abrmd-2.4.0.tar.gz
+Source0  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.4.0/tpm2-abrmd-2.4.0.tar.gz
+Source1  : https://github.com/tpm2-software/tpm2-abrmd/releases/download/2.4.0/tpm2-abrmd-2.4.0.tar.gz.asc
 Summary  : TCTI library for communicating with the TPM2 access broker / resource manager daemon (tabrmd).
 Group    : Development/Tools
 License  : BSD-2-Clause
@@ -27,10 +27,9 @@ BuildRequires : pkgconfig(tss2-mu)
 BuildRequires : pkgconfig(tss2-rc)
 BuildRequires : pkgconfig(tss2-sys)
 BuildRequires : pkgconfig(tss2-tctildr)
-BuildRequires : valgrind
 
 %description
-[![Linux Build Status](https://travis-ci.org/tpm2-software/tpm2-abrmd.svg?branch=master)](https://travis-ci.org/tpm2-software/tpm2-abrmd)
+![Linux Build Status](https://github.com/tpm2-software/tpm2-abrmd/workflows/Linux%20Build%20Status/badge.svg)
 [![FreeBSD Build Status](https://api.cirrus-ci.com/github/tpm2-software/tpm2-abrmd.svg?branch=master)](https://cirrus-ci.com/github/tpm2-software/tpm2-abrmd)
 [![Coverity Scan](https://img.shields.io/coverity/scan/3997.svg)](https://scan.coverity.com/projects/01org-tpm2-abrmd)
 [![codecov](https://codecov.io/gh/tpm2-software/tpm2-abrmd/branch/master/graph/badge.svg)](https://codecov.io/gh/tpm2-software/tpm2-abrmd)
@@ -103,15 +102,15 @@ services components for the tpm2-abrmd package.
 
 
 %prep
-%setup -q -n tpm2-abrmd-2.3.3
-cd %{_builddir}/tpm2-abrmd-2.3.3
+%setup -q -n tpm2-abrmd-2.4.0
+cd %{_builddir}/tpm2-abrmd-2.4.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1603223222
+export SOURCE_DATE_EPOCH=1612888796
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -134,10 +133,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1603223222
+export SOURCE_DATE_EPOCH=1612888796
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tpm2-abrmd
-cp %{_builddir}/tpm2-abrmd-2.3.3/LICENSE %{buildroot}/usr/share/package-licenses/tpm2-abrmd/af62924ad3089277c413ea767486f404ac159ce1
+cp %{_builddir}/tpm2-abrmd-2.4.0/LICENSE %{buildroot}/usr/share/package-licenses/tpm2-abrmd/af62924ad3089277c413ea767486f404ac159ce1
 %make_install
 
 %files
