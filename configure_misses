@@ -1,2 +1,2 @@
-Configure miss: whether to enable debugging
 Configure miss: whether to add -D_FORTIFY_SOURCE=2 to CPPFLAGS
+Configure miss: whether to enable debugging
